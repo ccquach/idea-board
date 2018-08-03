@@ -7,7 +7,7 @@ const Title = styled.input`
   font-size: 1.7rem;
   letter-spacing: 0.5px;
   text-align: center;
-  color: #34495e;
+  color: #273c75;
   padding-right: 3rem;
   width: 100%;
 `;

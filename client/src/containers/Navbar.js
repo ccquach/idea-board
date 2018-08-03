@@ -10,19 +10,30 @@ const NavContainer = styled.nav`
 `;
 
 const NewButton = styled.button`
-  border: none;
-  border-radius: 3px;
   padding: 1.5rem 4rem;
   text-transform: uppercase;
   font-size: 1.5rem;
   letter-spacing: 0.5px;
-  cursor: pointer;
+`;
+
+const Flash = styled.div`
+  display: inline-block;
+  float: right;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: rgba(39, 60, 117, 0.8);
+  color: #f1f1f1;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1.5rem 2rem;
 `;
 
 export class Navbar extends Component {
   static propTypes = {
     fetchIdeas: PropTypes.func,
-    addIdea: PropTypes.func
+    addIdea: PropTypes.func,
+    flash: PropTypes.object
   };
 
   handleNewIdea = () => {
@@ -36,15 +47,31 @@ export class Navbar extends Component {
   };
 
   render() {
+    const { flash } = this.props;
     return (
       <NavContainer className="row">
-        <NewButton onClick={this.handleNewIdea}>Add new idea</NewButton>
+        <div className="col-4">
+          <NewButton
+            className="btn btn-outline-primary btn-lg"
+            onClick={this.handleNewIdea}
+          >
+            Add new idea
+          </NewButton>
+        </div>
+
+        <div className="col-4" />
+
+        <div className="col-4">
+          {flash.message && <Flash>{flash.message}</Flash>}
+        </div>
       </NavContainer>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  flash: state.flash
+});
 
 export default connect(
   mapStateToProps,

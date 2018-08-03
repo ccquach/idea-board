@@ -1,5 +1,6 @@
 import { LOAD_IDEAS, REMOVE_IDEA, UPDATE_IDEA } from '../actionTypes';
 import { addError, removeError } from './errors';
+import { addFlash, removeFlash } from './flash';
 import { apiCall } from '../../services/api';
 
 const loadIdeas = ideas => ({
@@ -61,6 +62,10 @@ export const updateIdea = (id, obj) => dispatch => {
       .then(res => {
         dispatch(removeError());
         dispatch(update(res));
+        dispatch(addFlash());
+        setTimeout(() => {
+          dispatch(removeFlash());
+        }, 3000);
         resolve();
       })
       .catch(err => {
