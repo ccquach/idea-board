@@ -21,19 +21,51 @@ class IdeaRating extends Component {
     rating: PropTypes.number
   };
 
-  state = { rating: this.props.rating };
+  state = {
+    rating: this.props.rating,
+    display: this.props.rating
+  };
+
+  handleMouseEnter = val => {
+    this.setState({ display: val });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ display: this.state.rating });
+  };
+
+  handleClick = () => {
+    this.setState({ rating: this.state.display });
+  };
 
   render() {
-    const { rating } = this.state;
+    const { display } = this.state;
 
     const icons = [];
-    for (let i = 0; i < rating; i++) {
-      icons.push(<Icon key={i} className="fas fa-lightbulb" />);
+    // Full icons
+    for (let i = 0; i < display; i++) {
+      icons.push(
+        <Icon
+          key={i}
+          className="fas fa-lightbulb"
+          onMouseEnter={this.handleMouseEnter.bind(this, i + 1)}
+          onMouseLeave={this.handleMouseLeave}
+          onClick={this.handleClick}
+        />
+      );
     }
-
-    if (rating < 5) {
-      for (let i = 0; i < MAX_RATING - rating; i++) {
-        icons.push(<Icon key={i + rating} className="far fa-lightbulb" />);
+    // Empty icons
+    if (display < 5) {
+      for (let i = 0; i < MAX_RATING - display; i++) {
+        icons.push(
+          <Icon
+            key={i + display}
+            className="far fa-lightbulb"
+            onMouseEnter={this.handleMouseEnter.bind(this, i + display + 1)}
+            onMouseLeave={this.handleMouseLeave}
+            onClick={this.handleClick}
+          />
+        );
       }
     }
 
