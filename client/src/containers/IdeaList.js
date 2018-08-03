@@ -3,17 +3,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Idea from '../components/Idea';
-import { fetchIdeas } from '../store/actions/ideas';
+import { fetchIdeas, removeIdea } from '../store/actions/ideas';
 
 export class IdeaList extends Component {
   static propTypes = {
     ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
     errors: PropTypes.object,
-    fetchIdeas: PropTypes.func
+    fetchIdeas: PropTypes.func,
+    removeIdea: PropTypes.func
   };
 
   componentDidMount = () => {
     this.props.fetchIdeas();
+  };
+
+  handleRemove = id => {
+    this.props
+      .removeIdea(id)
+      .then(() => this.props.fetchIdeas())
+      .catch(() => {
+        return;
+      });
   };
 
   render() {
@@ -23,8 +33,8 @@ export class IdeaList extends Component {
         title={i.title}
         content={i.content}
         rating={i.rating}
-        createdAt={i.createdAt}
         updatedAt={i.updatedAt}
+        removeIdea={this.handleRemove.bind(this, i._id)}
       />
     ));
 
@@ -39,5 +49,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchIdeas }
+  { fetchIdeas, removeIdea }
 )(IdeaList);

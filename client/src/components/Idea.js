@@ -10,11 +10,11 @@ const Card = styled.div`
   min-height: 25rem;
 `;
 
-const CloseButton = styled.a`
+const DeleteButton = styled.a`
   &:link,
-  &:active {
+  &:visited {
     text-decoration: none;
-    color: inherit;
+    color: #212121;
     position: absolute;
     top: 0.7rem;
     right: 1rem;
@@ -25,7 +25,8 @@ const CloseButton = styled.a`
     transition: color 0.2s ease-out;
   }
 
-  &:hover {
+  &:hover,
+  &:active {
     color: #e84118;
   }
 `;
@@ -37,11 +38,13 @@ const DateBox = styled.div`
   padding: 1.5rem 1.75rem;
 `;
 
-const Idea = ({ title, content, rating, updatedAt }) => {
+const Idea = ({ title, content, rating, updatedAt, removeIdea }) => {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
       <Card className="card mb-5">
-        <CloseButton href="#">&times;</CloseButton>
+        <DeleteButton href="#" onClick={removeIdea}>
+          &times;
+        </DeleteButton>
         <IdeaForm title={title} content={content} />
         <IdeaRating rating={rating} />
         <DateBox>
@@ -56,7 +59,8 @@ Idea.propTypes = {
   title: PropTypes.string,
   content: PropTypes.string,
   rating: PropTypes.number,
-  updatedAt: PropTypes.string
+  updatedAt: PropTypes.string,
+  removeIdea: PropTypes.func
 };
 
 export default Idea;

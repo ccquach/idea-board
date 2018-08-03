@@ -31,7 +31,6 @@ export class Navbar extends Component {
       .addIdea(newIdea)
       .then(() => this.props.fetchIdeas())
       .catch(() => {
-        console.log('add failed');
         return;
       });
   };
