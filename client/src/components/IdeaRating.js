@@ -18,7 +18,8 @@ const Icon = styled.i`
 
 class IdeaRating extends Component {
   static propTypes = {
-    rating: PropTypes.number
+    rating: PropTypes.number,
+    updateIdea: PropTypes.func
   };
 
   state = {
@@ -35,7 +36,9 @@ class IdeaRating extends Component {
   };
 
   handleClick = () => {
-    this.setState({ rating: this.state.display });
+    this.setState({ rating: this.state.display }, () => {
+      this.props.updateIdea({ rating: this.state.rating });
+    });
   };
 
   render() {

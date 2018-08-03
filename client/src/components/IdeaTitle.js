@@ -14,7 +14,8 @@ const Title = styled.input`
 
 class IdeaTitle extends Component {
   static propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    updateIdea: PropTypes.func
   };
 
   state = {
@@ -30,6 +31,7 @@ class IdeaTitle extends Component {
         className="card-header"
         value={title}
         onChange={e => this.setState({ title: e.target.value })}
+        onBlur={() => this.props.updateIdea(this.state)}
       />
     );
   }

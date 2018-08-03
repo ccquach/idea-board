@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Idea from '../components/Idea';
-import { fetchIdeas, removeIdea } from '../store/actions/ideas';
+import { fetchIdeas, removeIdea, updateIdea } from '../store/actions/ideas';
 
 export class IdeaList extends Component {
   static propTypes = {
     ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    errors: PropTypes.object,
     fetchIdeas: PropTypes.func,
-    removeIdea: PropTypes.func
+    removeIdea: PropTypes.func,
+    updateIdea: PropTypes.func
   };
 
   componentDidMount = () => {
@@ -35,6 +35,7 @@ export class IdeaList extends Component {
         rating={i.rating}
         updatedAt={i.updatedAt}
         removeIdea={this.handleRemove.bind(this, i._id)}
+        updateIdea={this.props.updateIdea.bind(this, i._id)}
       />
     ));
 
@@ -43,11 +44,10 @@ export class IdeaList extends Component {
 }
 
 const mapStateToProps = state => ({
-  ideas: state.ideas,
-  errors: state.errors
+  ideas: state.ideas
 });
 
 export default connect(
   mapStateToProps,
-  { fetchIdeas, removeIdea }
+  { fetchIdeas, removeIdea, updateIdea }
 )(IdeaList);

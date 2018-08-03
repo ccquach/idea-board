@@ -13,7 +13,8 @@ const Content = styled.textarea`
 
 class IdeaContent extends Component {
   static propTypes = {
-    content: PropTypes.string
+    content: PropTypes.string,
+    updateIdea: PropTypes.func
   };
 
   state = { content: this.props.content };
@@ -28,6 +29,7 @@ class IdeaContent extends Component {
         className="card-text"
         value={content}
         onChange={e => this.setState({ content: e.target.value })}
+        onBlur={() => this.props.updateIdea(this.state)}
       />
     );
   }

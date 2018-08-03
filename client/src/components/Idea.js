@@ -38,15 +38,22 @@ const DateBox = styled.div`
   padding: 1.5rem 1.75rem;
 `;
 
-const Idea = ({ title, content, rating, updatedAt, removeIdea }) => {
+const Idea = ({
+  title,
+  content,
+  rating,
+  updatedAt,
+  removeIdea,
+  updateIdea
+}) => {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
       <Card className="card mb-5">
         <DeleteButton href="#" onClick={removeIdea}>
           &times;
         </DeleteButton>
-        <IdeaForm title={title} content={content} />
-        <IdeaRating rating={rating} />
+        <IdeaForm title={title} content={content} updateIdea={updateIdea} />
+        <IdeaRating rating={rating} updateIdea={updateIdea} />
         <DateBox>
           <Moment format="YYYY/MM/DD">{updatedAt}</Moment>
         </DateBox>
@@ -60,7 +67,8 @@ Idea.propTypes = {
   content: PropTypes.string,
   rating: PropTypes.number,
   updatedAt: PropTypes.string,
-  removeIdea: PropTypes.func
+  removeIdea: PropTypes.func,
+  updateIdea: PropTypes.func
 };
 
 export default Idea;

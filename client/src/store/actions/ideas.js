@@ -1,4 +1,4 @@
-import { LOAD_IDEAS, REMOVE_IDEA } from '../actionTypes';
+import { LOAD_IDEAS, REMOVE_IDEA, UPDATE_IDEA } from '../actionTypes';
 import { addError, removeError } from './errors';
 import { apiCall } from '../../services/api';
 
@@ -12,16 +12,24 @@ const remove = id => ({
   id
 });
 
+const update = idea => ({
+  type: UPDATE_IDEA,
+  idea
+});
+
 export const fetchIdeas = () => dispatch => {
   return apiCall('get', '/api/ideas')
-    .then(res => dispatch(loadIdeas(res)))
+    .then(res => {
+      dispatch(removeError());
+      dispatch(loadIdeas(res));
+    })
     .catch(err => dispatch(addError(err.message)));
 };
 
 export const addIdea = idea => dispatch => {
   return new Promise((resolve, reject) => {
     return apiCall('post', '/api/ideas', idea)
-      .then(res => {
+      .then(() => {
         dispatch(removeError());
         resolve();
       })
@@ -42,6 +50,21 @@ export const removeIdea = id => dispatch => {
       })
       .catch(err => {
         dispatch(addError(err.message));
+        reject();
+      });
+  });
+};
+
+export const updateIdea = (id, obj) => dispatch => {
+  return new Promise((resolve, reject) => {
+    return apiCall('put', `/api/ideas/${id}`, obj)
+      .then(res => {
+        dispatch(removeError());
+        dispatch(update(res));
+        resolve();
+      })
+      .catch(err => {
+        dispatch(addError(err.mesage));
         reject();
       });
   });
