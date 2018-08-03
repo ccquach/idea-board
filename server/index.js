@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const PORT = 3000;
+const PORT = 3001;
 
 const errorHandler = require('./handlers/error');
 const ideaRoutes = require('./routes/ideas');
