@@ -40,7 +40,7 @@ const DateBox = styled.div`
 const Idea = ({ title, content, rating, updatedAt }) => {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-      <Card className="card">
+      <Card className="card mb-5">
         <CloseButton href="#">&times;</CloseButton>
         <IdeaForm title={title} content={content} />
         <IdeaRating rating={rating} />

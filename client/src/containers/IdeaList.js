@@ -28,7 +28,7 @@ export class IdeaList extends Component {
       />
     ));
 
-    return <div className="row">{ideas}</div>;
+    return <main className="row mt-5">{ideas}</main>;
   }
 }
 
