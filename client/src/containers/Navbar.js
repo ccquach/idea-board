@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { fetchIdeas, addIdea } from '../store/actions/ideas';
+import { setSortOrder } from '../store/actions/sort';
 
 const NavContainer = styled.nav`
   padding: 2rem 2.5rem;
@@ -29,11 +30,20 @@ const Flash = styled.div`
   padding: 1.5rem 2rem;
 `;
 
+const Label = styled.label`
+  font-size: 1.3rem;
+`;
+
+const Select = styled.select`
+  font-size: 1.4rem;
+`;
+
 export class Navbar extends Component {
   static propTypes = {
     fetchIdeas: PropTypes.func,
     addIdea: PropTypes.func,
-    flash: PropTypes.object
+    flash: PropTypes.object,
+    setSortOrder: PropTypes.func
   };
 
   handleNewIdea = () => {
@@ -46,11 +56,17 @@ export class Navbar extends Component {
       });
   };
 
+  handleSort = e => {
+    const splitVal = e.target.value.split('_');
+    const sortObj = { [splitVal[0]]: splitVal[1] };
+    this.props.setSortOrder(sortObj);
+  };
+
   render() {
     const { flash } = this.props;
     return (
       <NavContainer className="row">
-        <div className="col-4">
+        <div className="col-md-4">
           <NewButton
             className="btn btn-outline-primary btn-lg"
             onClick={this.handleNewIdea}
@@ -59,9 +75,26 @@ export class Navbar extends Component {
           </NewButton>
         </div>
 
-        <div className="col-4" />
+        <div className="col-md-4">
+          <form onSubmit={e => e.preventDefault()}>
+            <Label htmlFor="sort">Sort by:</Label>
+            <Select
+              name="sort"
+              id="sort"
+              className="form-control form-control-lg"
+              onChange={this.handleSort}
+            >
+              <option value="updatedAt_desc" defaultValue>
+                Most recent
+              </option>
+              <option value="updatedAt_asc">Least recent</option>
+              <option value="rating_desc">Highest rated</option>
+              <option value="rating_asc">Lowest rated</option>
+            </Select>
+          </form>
+        </div>
 
-        <div className="col-4">
+        <div className="col-md-4">
           {flash.message && <Flash>{flash.message}</Flash>}
         </div>
       </NavContainer>
@@ -75,5 +108,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchIdeas, addIdea }
+  { fetchIdeas, addIdea, setSortOrder }
 )(Navbar);

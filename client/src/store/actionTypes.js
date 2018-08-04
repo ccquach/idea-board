@@ -7,3 +7,5 @@ export const UPDATE_IDEA = 'UPDATE_IDEA';
 
 export const ADD_FLASH = 'ADD_FLASH';
 export const REMOVE_FLASH = 'REMOVE_FLASH';
+
+export const SET_SORT_ORDER = 'SET_SORT_ORDER';

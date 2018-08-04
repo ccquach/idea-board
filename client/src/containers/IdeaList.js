@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Idea from '../components/Idea';
 import { fetchIdeas, removeIdea, updateIdea } from '../store/actions/ideas';
+import { getSortedData } from '../utils/sort';
 
 export class IdeaList extends Component {
   static propTypes = {
@@ -44,7 +45,7 @@ export class IdeaList extends Component {
 }
 
 const mapStateToProps = state => ({
-  ideas: state.ideas
+  ideas: getSortedData(state.ideas, state.sort.sortObj)
 });
 
 export default connect(

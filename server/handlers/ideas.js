@@ -3,7 +3,7 @@ const db = require('../models');
 // GET
 exports.getIdeas = async function(req, res, next) {
   try {
-    let ideas = await db.Idea.find().sort({ createdAt: 'desc' });
+    let ideas = await db.Idea.find().sort({ updatedAt: 'desc' });
     return res.status(200).json(ideas);
   } catch (err) {
     return next(err);
