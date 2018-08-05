@@ -4,9 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { configureStore } from '../store';
 
 import Header from '../components/Header';
-import Navbar from './Navbar';
-import Error from './Error';
-import IdeaList from './IdeaList';
+import Main from '../components/Main';
 
 const store = configureStore();
 
@@ -17,9 +15,7 @@ class App extends Component {
         <Router>
           <div className="container">
             <Header />
-            <Navbar />
-            <Error />
-            <IdeaList />
+            <Main />
           </div>
         </Router>
       </Provider>

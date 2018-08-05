@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 
 import Idea from '../components/Idea';
 import { fetchIdeas, removeIdea, updateIdea } from '../store/actions/ideas';
+import { getFilteredData } from '../utils/filters';
 import { getSortedData } from '../utils/sort';
 
 export class IdeaList extends Component {
   static propTypes = {
     ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchIdeas: PropTypes.func,
-    removeIdea: PropTypes.func,
-    updateIdea: PropTypes.func
+    fetchIdeas: PropTypes.func.isRequired,
+    removeIdea: PropTypes.func.isRequired,
+    updateIdea: PropTypes.func.isRequired,
+    sort: PropTypes.object.isRequired,
+    filter: PropTypes.string.isRequired
   };
 
   componentDidMount = () => {
@@ -28,7 +31,8 @@ export class IdeaList extends Component {
   };
 
   render() {
-    const ideas = this.props.ideas.map(i => (
+    const { ideas, sort } = this.props;
+    const ideasList = getSortedData(ideas, sort).map(i => (
       <Idea
         key={i._id}
         title={i.title}
@@ -40,12 +44,12 @@ export class IdeaList extends Component {
       />
     ));
 
-    return <main className="row mt-5">{ideas}</main>;
+    return <main className="row mt-5">{ideasList}</main>;
   }
 }
 
 const mapStateToProps = state => ({
-  ideas: getSortedData(state.ideas, state.sort.sortObj)
+  ideas: state.ideas
 });
 
 export default connect(

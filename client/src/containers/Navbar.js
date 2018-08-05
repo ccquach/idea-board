@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { fetchIdeas, addIdea } from '../store/actions/ideas';
-import { setSortOrder } from '../store/actions/sort';
 
 const NavContainer = styled.nav`
   padding: 2rem 2.5rem;
@@ -43,7 +42,7 @@ export class Navbar extends Component {
     fetchIdeas: PropTypes.func,
     addIdea: PropTypes.func,
     flash: PropTypes.object,
-    setSortOrder: PropTypes.func
+    onSort: PropTypes.func
   };
 
   handleNewIdea = () => {
@@ -59,7 +58,7 @@ export class Navbar extends Component {
   handleSort = e => {
     const splitVal = e.target.value.split('_');
     const sortObj = { [splitVal[0]]: splitVal[1] };
-    this.props.setSortOrder(sortObj);
+    this.props.onSort(sortObj);
   };
 
   render() {
@@ -108,5 +107,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchIdeas, addIdea, setSortOrder }
+  { fetchIdeas, addIdea }
 )(Navbar);
