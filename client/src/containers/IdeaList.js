@@ -12,9 +12,7 @@ export class IdeaList extends Component {
     ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchIdeas: PropTypes.func.isRequired,
     removeIdea: PropTypes.func.isRequired,
-    updateIdea: PropTypes.func.isRequired,
-    sort: PropTypes.object.isRequired,
-    filter: PropTypes.string.isRequired
+    updateIdea: PropTypes.func.isRequired
   };
 
   componentDidMount = () => {
@@ -31,13 +29,13 @@ export class IdeaList extends Component {
   };
 
   render() {
-    const { ideas, sort } = this.props;
-    const ideasList = getSortedData(ideas, sort).map(i => (
+    const ideasList = this.props.ideas.map(i => (
       <Idea
         key={i._id}
         title={i.title}
         content={i.content}
         rating={i.rating}
+        completed={i.completed}
         updatedAt={i.updatedAt}
         removeIdea={this.handleRemove.bind(this, i._id)}
         updateIdea={this.props.updateIdea.bind(this, i._id)}
@@ -49,7 +47,10 @@ export class IdeaList extends Component {
 }
 
 const mapStateToProps = state => ({
-  ideas: state.ideas
+  ideas: getSortedData(
+    getFilteredData(state.ideas, state.utils.filter),
+    state.utils.sort
+  )
 });
 
 export default connect(

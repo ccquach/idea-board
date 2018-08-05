@@ -7,6 +7,7 @@ import IdeaForm from './IdeaForm';
 import IdeaRating from './IdeaRating';
 
 const Card = styled.div`
+  position: relative;
   min-height: 25rem;
 `;
 
@@ -31,6 +32,12 @@ const DeleteButton = styled.a`
   }
 `;
 
+const ArchiveButton = styled.button`
+  position: absolute;
+  bottom: 4rem;
+  right: 1.5rem;
+`;
+
 const DateBox = styled.div`
   position: absolute;
   bottom: 0;
@@ -42,6 +49,7 @@ const Idea = ({
   title,
   content,
   rating,
+  completed,
   updatedAt,
   removeIdea,
   updateIdea
@@ -52,8 +60,18 @@ const Idea = ({
         <DeleteButton href="#" onClick={removeIdea}>
           &times;
         </DeleteButton>
+
         <IdeaForm title={title} content={content} updateIdea={updateIdea} />
+
+        <ArchiveButton
+          className="btn btn-outline-secondary"
+          onClick={() => updateIdea({ completed: !completed })}
+        >
+          {completed ? 'Restore' : 'Archive'}
+        </ArchiveButton>
+
         <IdeaRating rating={rating} updateIdea={updateIdea} />
+
         <DateBox>
           <Moment format="YYYY/MM/DD">{updatedAt}</Moment>
         </DateBox>
@@ -66,6 +84,7 @@ Idea.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
+  completed: PropTypes.bool.isRequired,
   updatedAt: PropTypes.string.isRequired,
   removeIdea: PropTypes.func.isRequired,
   updateIdea: PropTypes.func.isRequired

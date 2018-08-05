@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Sidebar from './Sidebar';
 import Navbar from '../containers/Navbar';
 import Error from '../containers/Error';
 import IdeaList from '../containers/IdeaList';
+import { setFilter } from '../store/actions/utils';
 
-class Main extends Component {
-  state = {
-    sort: { updatedAt: 'desc' },
-    filter: ''
-  };
-
-  handleSort = sortObj => {
-    this.setState({ sort: sortObj });
-  };
-
-  handleFilter = filter => {
-    debugger;
-    this.setState({ filter });
+export class Main extends Component {
+  static propTypes = {
+    filter: PropTypes.object.isRequired,
+    setFilter: PropTypes.func.isRequired
   };
 
   render() {
-    const { sort, filter } = this.state;
-
+    const { filter, setFilter } = this.props;
     return (
       <div className="row">
         <div className="col-md-2">
-          <Sidebar filter={filter} />
+          <Sidebar filter={filter} onFilter={setFilter} />
         </div>
         <div className="col-md-10">
-          <Navbar onSort={this.handleSort} />
+          <Navbar />
           <Error />
-          <IdeaList sort={sort} filter={filter} />
+          <IdeaList />
         </div>
       </div>
     );
   }
 }
 
-export default Main;
+const mapStateToProps = state => ({
+  filter: state.utils.filter
+});
+
+export default connect(
+  mapStateToProps,
+  { setFilter }
+)(Main);
