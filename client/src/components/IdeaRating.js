@@ -18,8 +18,8 @@ const Icon = styled.i`
 
 class IdeaRating extends Component {
   static propTypes = {
-    rating: PropTypes.number,
-    updateIdea: PropTypes.func
+    rating: PropTypes.number.isRequired,
+    updateIdea: PropTypes.func.isRequired
   };
 
   state = {

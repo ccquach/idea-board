@@ -9,7 +9,7 @@ const Alert = styled.div`
 
 export class Error extends Component {
   static propTypes = {
-    errors: PropTypes.object
+    errors: PropTypes.object.isRequired
   };
 
   render() {

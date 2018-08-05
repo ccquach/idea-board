@@ -14,8 +14,8 @@ const Title = styled.input`
 
 class IdeaTitle extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    updateIdea: PropTypes.func
+    title: PropTypes.string.isRequired,
+    updateIdea: PropTypes.func.isRequired
   };
 
   state = {

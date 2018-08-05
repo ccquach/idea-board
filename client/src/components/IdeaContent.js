@@ -13,8 +13,8 @@ const Content = styled.textarea`
 
 class IdeaContent extends Component {
   static propTypes = {
-    content: PropTypes.string,
-    updateIdea: PropTypes.func
+    content: PropTypes.string.isRequired,
+    updateIdea: PropTypes.func.isRequired
   };
 
   state = { content: this.props.content };

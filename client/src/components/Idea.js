@@ -63,12 +63,12 @@ const Idea = ({
 };
 
 Idea.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  rating: PropTypes.number,
-  updatedAt: PropTypes.string,
-  removeIdea: PropTypes.func,
-  updateIdea: PropTypes.func
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  updatedAt: PropTypes.string.isRequired,
+  removeIdea: PropTypes.func.isRequired,
+  updateIdea: PropTypes.func.isRequired
 };
 
 export default Idea;
