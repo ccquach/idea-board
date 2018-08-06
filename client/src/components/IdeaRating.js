@@ -9,6 +9,7 @@ const IconGroup = styled.div`
   bottom: 0;
   left: 0;
   padding: 1.5rem 1.75rem;
+  z-index: 100;
 `;
 
 const Icon = styled.i`
@@ -36,35 +37,36 @@ class IdeaRating extends Component {
   };
 
   handleClick = () => {
-    this.setState({ rating: this.state.display }, () => {
-      this.props.updateIdea({ rating: this.state.rating });
-    });
+    if (this.state.display !== this.state.rating)
+      this.setState({ rating: this.state.display }, () => {
+        this.props.updateIdea({ rating: this.state.rating });
+      });
   };
 
   render() {
     const { display } = this.state;
 
-    const icons = [];
+    let icons = [];
     // Full icons
-    for (let i = 0; i < display; i++) {
+    for (let i = 1; i <= display; i++) {
       icons.push(
         <Icon
           key={i}
           className="fas fa-lightbulb"
-          onMouseEnter={this.handleMouseEnter.bind(this, i + 1)}
+          onMouseEnter={this.handleMouseEnter.bind(this, i)}
           onMouseLeave={this.handleMouseLeave}
           onClick={this.handleClick}
         />
       );
     }
     // Empty icons
-    if (display < 5) {
-      for (let i = 0; i < MAX_RATING - display; i++) {
+    if (display < MAX_RATING) {
+      for (let i = 1 + display; i <= MAX_RATING; i++) {
         icons.push(
           <Icon
-            key={i + display}
+            key={i}
             className="far fa-lightbulb"
-            onMouseEnter={this.handleMouseEnter.bind(this, i + display + 1)}
+            onMouseEnter={this.handleMouseEnter.bind(this, i)}
             onMouseLeave={this.handleMouseLeave}
             onClick={this.handleClick}
           />

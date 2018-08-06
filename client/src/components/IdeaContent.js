@@ -17,7 +17,23 @@ class IdeaContent extends Component {
     updateIdea: PropTypes.func.isRequired
   };
 
-  state = { content: this.props.content };
+  state = {
+    content: this.props.content,
+    isModified: false
+  };
+
+  handleChange = e => {
+    if (e.target.value !== this.state.content)
+      this.setState({ isModified: true });
+    this.setState({ content: e.target.value });
+  };
+
+  handleUpdate = () => {
+    if (this.state.isModified)
+      this.props
+        .updateIdea(this.state)
+        .then(() => this.setState({ isModified: false }));
+  };
 
   render() {
     const { content } = this.state;
@@ -28,8 +44,8 @@ class IdeaContent extends Component {
         maxLength="100"
         className="card-text"
         value={content}
-        onChange={e => this.setState({ content: e.target.value })}
-        onBlur={() => this.props.updateIdea(this.state)}
+        onChange={this.handleChange}
+        onBlur={this.handleUpdate}
       />
     );
   }

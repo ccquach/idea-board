@@ -19,7 +19,21 @@ class IdeaTitle extends Component {
   };
 
   state = {
-    title: this.props.title
+    title: this.props.title,
+    isModified: false
+  };
+
+  handleChange = e => {
+    if (e.target.value !== this.state.title)
+      this.setState({ isModified: true });
+    this.setState({ title: e.target.value });
+  };
+
+  handleUpdate = () => {
+    if (this.state.isModified)
+      this.props
+        .updateIdea(this.state)
+        .then(() => this.setState({ isModified: false }));
   };
 
   render() {
@@ -30,8 +44,8 @@ class IdeaTitle extends Component {
         maxLength="20"
         className="card-header"
         value={title}
-        onChange={e => this.setState({ title: e.target.value })}
-        onBlur={() => this.props.updateIdea(this.state)}
+        onChange={this.handleChange}
+        onBlur={this.handleUpdate}
       />
     );
   }
