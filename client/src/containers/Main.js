@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Sidebar from './Sidebar';
-import Navbar from '../containers/Navbar';
-import Error from '../containers/Error';
-import IdeaList from '../containers/IdeaList';
+import Sidebar from '../components/Sidebar';
+import Navbar from './Navbar';
+import Error from './Error';
+import IdeaList from './IdeaList';
 import { setFilter } from '../store/actions/utils';
 
 export class Main extends Component {

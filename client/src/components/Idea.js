@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Moment from 'react-moment';
@@ -23,7 +23,8 @@ const DeleteButton = styled.a`
     font-weight: 400;
     line-height: 1;
     cursor: pointer;
-    transition: color 0.2s ease-out;
+    transition: all 0.3s ease-out;
+    opacity: ${props => (props.visible ? '1' : '0')};
   }
 
   &:hover,
@@ -36,6 +37,8 @@ const ArchiveButton = styled.button`
   position: absolute;
   bottom: 4rem;
   right: 1.5rem;
+  transition: opacity 0.3s ease-out;
+  opacity: ${props => (props.visible ? '1' : '0')};
 `;
 
 const DateBox = styled.div`
@@ -45,49 +48,66 @@ const DateBox = styled.div`
   padding: 1.5rem 1.75rem;
 `;
 
-const Idea = ({
-  title,
-  content,
-  rating,
-  completed,
-  updatedAt,
-  removeIdea,
-  updateIdea
-}) => {
-  return (
-    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-      <Card className="card mb-5">
-        <DeleteButton href="#" onClick={removeIdea}>
-          &times;
-        </DeleteButton>
+class Idea extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    completed: PropTypes.bool.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    removeIdea: PropTypes.func.isRequired,
+    updateIdea: PropTypes.func.isRequired
+  };
 
-        <IdeaForm title={title} content={content} updateIdea={updateIdea} />
+  state = {
+    hover: false
+  };
 
-        <ArchiveButton
-          className="btn btn-outline-secondary"
-          onClick={() => updateIdea({ completed: !completed })}
+  render() {
+    const {
+      title,
+      content,
+      rating,
+      completed,
+      updatedAt,
+      removeIdea,
+      updateIdea
+    } = this.props;
+
+    return (
+      <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+        <Card
+          className="card mb-5"
+          onMouseEnter={() => this.setState({ hover: true })}
+          onMouseLeave={() => this.setState({ hover: false })}
         >
-          {completed ? 'Restore' : 'Archive'}
-        </ArchiveButton>
+          <DeleteButton
+            href="#"
+            visible={this.state.hover}
+            onClick={removeIdea}
+          >
+            &times;
+          </DeleteButton>
 
-        <IdeaRating rating={rating} updateIdea={updateIdea} />
+          <IdeaForm title={title} content={content} updateIdea={updateIdea} />
 
-        <DateBox>
-          <Moment format="YYYY/MM/DD">{updatedAt}</Moment>
-        </DateBox>
-      </Card>
-    </div>
-  );
-};
+          <ArchiveButton
+            className="btn btn-outline-secondary"
+            visible={this.state.hover}
+            onClick={() => updateIdea({ completed: !completed })}
+          >
+            {completed ? 'Restore' : 'Archive'}
+          </ArchiveButton>
 
-Idea.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  completed: PropTypes.bool.isRequired,
-  updatedAt: PropTypes.string.isRequired,
-  removeIdea: PropTypes.func.isRequired,
-  updateIdea: PropTypes.func.isRequired
-};
+          <IdeaRating rating={rating} updateIdea={updateIdea} />
+
+          <DateBox>
+            <Moment format="YYYY/MM/DD">{updatedAt}</Moment>
+          </DateBox>
+        </Card>
+      </div>
+    );
+  }
+}
 
 export default Idea;
