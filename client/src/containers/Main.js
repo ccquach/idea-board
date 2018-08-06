@@ -14,12 +14,25 @@ export class Main extends Component {
     setFilter: PropTypes.func.isRequired
   };
 
+  countIdeas = ideas => {
+    const current = ideas.reduce((acc, next) => {
+      if (!next.completed) acc++;
+      return acc;
+    }, 0);
+    const archive = ideas.length - current;
+    return { current, archive };
+  };
+
   render() {
-    const { filter, setFilter } = this.props;
+    const { filter, setFilter, ideas } = this.props;
     return (
       <div className="row">
         <div className="col-md-2">
-          <Sidebar filter={filter} onFilter={setFilter} />
+          <Sidebar
+            filter={filter}
+            onFilter={setFilter}
+            count={this.countIdeas(ideas)}
+          />
         </div>
         <div className="col-md-10">
           <Navbar />
@@ -32,7 +45,8 @@ export class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  filter: state.utils.filter
+  filter: state.utils.filter,
+  ideas: state.ideas
 });
 
 export default connect(

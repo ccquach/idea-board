@@ -25,6 +25,7 @@ class Sidebar extends Component {
 
   render() {
     const { completed } = this.state;
+    const { count } = this.props;
     const linkClasses =
       'list-group-item list-group-item-action d-flex justify-content-between align-items-center';
 
@@ -37,7 +38,9 @@ class Sidebar extends Component {
             onClick={e => this.handleFilter(e, false)}
           >
             Current
-            <span className="badge badge-primary badge-pill">14</span>
+            <span className="badge badge-primary badge-pill">
+              {count.current}
+            </span>
           </a>
           <a
             href=""
@@ -45,7 +48,9 @@ class Sidebar extends Component {
             onClick={e => this.handleFilter(e, true)}
           >
             Archive
-            <span className="badge badge-primary badge-pill">14</span>
+            <span className="badge badge-primary badge-pill">
+              {count.archive}
+            </span>
           </a>
         </ul>
       </Aside>
@@ -55,7 +60,8 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {
   filter: PropTypes.object.isRequired,
-  onFilter: PropTypes.func.isRequired
+  onFilter: PropTypes.func.isRequired,
+  count: PropTypes.object.isRequired
 };
 
 export default Sidebar;
