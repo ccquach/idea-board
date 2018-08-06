@@ -1,6 +1,7 @@
 import { LOAD_IDEAS, REMOVE_IDEA, UPDATE_IDEA } from '../actionTypes';
 import { addError, removeError } from './errors';
 import { addFlash, removeFlash } from './flash';
+import { setLoadingState } from './loading';
 import { apiCall } from '../../services/api';
 
 const loadIdeas = ideas => ({
@@ -19,22 +20,30 @@ const update = idea => ({
 });
 
 export const fetchIdeas = () => dispatch => {
+  dispatch(setLoadingState(true));
   return apiCall('get', '/api/ideas')
     .then(res => {
+      dispatch(setLoadingState(false));
       dispatch(removeError());
       dispatch(loadIdeas(res));
     })
-    .catch(err => dispatch(addError(err.message)));
+    .catch(err => {
+      dispatch(setLoadingState(false));
+      dispatch(addError(err.message));
+    });
 };
 
 export const addIdea = idea => dispatch => {
+  dispatch(setLoadingState(true));
   return new Promise((resolve, reject) => {
     return apiCall('post', '/api/ideas', idea)
       .then(() => {
+        dispatch(setLoadingState(false));
         dispatch(removeError());
         resolve();
       })
       .catch(err => {
+        dispatch(setLoadingState(false));
         dispatch(addError(err.message));
         reject();
       });
@@ -42,14 +51,17 @@ export const addIdea = idea => dispatch => {
 };
 
 export const removeIdea = id => dispatch => {
+  dispatch(setLoadingState(true));
   return new Promise((resolve, reject) => {
     return apiCall('delete', `/api/ideas/${id}`)
       .then(() => {
+        dispatch(setLoadingState(false));
         dispatch(removeError());
         dispatch(remove(id));
         resolve();
       })
       .catch(err => {
+        dispatch(setLoadingState(false));
         dispatch(addError(err.message));
         reject();
       });

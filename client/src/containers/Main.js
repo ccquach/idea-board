@@ -6,12 +6,14 @@ import Sidebar from '../components/Sidebar';
 import Navbar from './Navbar';
 import Error from './Error';
 import IdeaList from './IdeaList';
+import Loading from '../components/Loading';
 import { setFilter } from '../store/actions/utils';
 
 export class Main extends Component {
   static propTypes = {
     filter: PropTypes.object.isRequired,
-    setFilter: PropTypes.func.isRequired
+    setFilter: PropTypes.func.isRequired,
+    loading: PropTypes.object.isRequired
   };
 
   countIdeas = ideas => {
@@ -24,9 +26,10 @@ export class Main extends Component {
   };
 
   render() {
-    const { filter, setFilter, ideas } = this.props;
+    const { filter, setFilter, ideas, loading } = this.props;
     return (
       <div className="row">
+        {loading.isFetching ? <Loading /> : null}
         <div className="col-md-2">
           <Sidebar
             filter={filter}
@@ -46,7 +49,8 @@ export class Main extends Component {
 
 const mapStateToProps = state => ({
   filter: state.utils.filter,
-  ideas: state.ideas
+  ideas: state.ideas,
+  loading: state.loading
 });
 
 export default connect(
