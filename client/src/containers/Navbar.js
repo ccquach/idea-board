@@ -63,13 +63,14 @@ export class Navbar extends Component {
   };
 
   render() {
-    const { flash } = this.props;
+    const { flash, filter } = this.props;
     return (
       <NavContainer className="row">
         <div className="col-md-4">
           <NewButton
             className="btn btn-outline-primary btn-lg"
             onClick={this.handleNewIdea}
+            disabled={filter.completed ? true : false}
           >
             Add new idea
           </NewButton>
@@ -103,7 +104,8 @@ export class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  flash: state.flash
+  flash: state.flash,
+  filter: state.utils.filter
 });
 
 export default connect(
