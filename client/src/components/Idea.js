@@ -7,6 +7,8 @@ import IdeaForm from './IdeaForm';
 import IdeaRating from './IdeaRating';
 
 const Card = styled.div`
+  opacity: 0.85;
+  color: #212121;
   position: relative;
   min-height: 25rem;
   border: none !important;
@@ -39,7 +41,7 @@ const DeleteButton = styled.a`
 
   &:hover,
   &:active {
-    color: #e84118;
+    color: #c6426e;
   }
 `;
 

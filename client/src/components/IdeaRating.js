@@ -10,11 +10,17 @@ const IconGroup = styled.div`
   left: 0;
   padding: 1.5rem 1.75rem;
   z-index: 100;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-out;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const Icon = styled.i`
   font-size: 2rem;
-  color: #f9ca24;
+  color: #642b73;
 `;
 
 class IdeaRating extends Component {

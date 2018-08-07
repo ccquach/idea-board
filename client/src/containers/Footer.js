@@ -15,6 +15,7 @@ const Container = styled.footer`
   font-size: 1.8rem;
   font-style: italic;
   letter-spacing: 0.25px;
+  color: #212121;
 `;
 
 const Quote = styled.blockquote`

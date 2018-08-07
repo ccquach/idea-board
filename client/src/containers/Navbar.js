@@ -11,7 +11,7 @@ const NavContainer = styled.nav`
 `;
 
 const NewButton = styled.button`
-  padding: 1.5rem 4rem;
+  padding: 1.25rem 3rem;
   text-transform: uppercase;
   font-size: 1.5rem;
   letter-spacing: 0.5px;
@@ -21,13 +21,12 @@ const Flash = styled.div`
   display: inline-block;
   float: right;
   border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  background-color: rgba(39, 60, 117, 0.8);
-  color: #f1f1f1;
-  font-size: 1.5rem;
+  background-color: rgba(245, 245, 245, 0.7);
+  color: #642b73;
+  font-size: 1.3rem;
   text-transform: uppercase;
   text-align: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.5rem;
 `;
 
 const Label = styled.label`
@@ -68,7 +67,7 @@ export class Navbar extends Component {
       <NavContainer className="row">
         <div className="col-md-4">
           <NewButton
-            className="btn btn-outline-primary btn-lg"
+            className="btn btn-outline-light btn-lg"
             onClick={this.handleNewIdea}
             disabled={filter.completed ? true : false}
           >

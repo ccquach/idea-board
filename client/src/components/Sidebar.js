@@ -27,10 +27,10 @@ class Sidebar extends Component {
     const { completed } = this.state;
     const { count } = this.props;
     const linkClasses =
-      'list-group-item list-group-item-action d-flex justify-content-between align-items-center';
+      'list-group-item list-group-item-action list-group-item-light d-flex justify-content-between align-items-center';
 
     return (
-      <Aside>
+      <Aside style={{ opacity: '.85' }}>
         <ul className="list-group">
           <a
             href=""
@@ -38,7 +38,7 @@ class Sidebar extends Component {
             onClick={e => this.handleFilter(e, false)}
           >
             Current
-            <span className="badge badge-primary badge-pill">
+            <span className="badge badge-light badge-pill">
               {count.current}
             </span>
           </a>
@@ -48,7 +48,7 @@ class Sidebar extends Component {
             onClick={e => this.handleFilter(e, true)}
           >
             Archive
-            <span className="badge badge-primary badge-pill">
+            <span className="badge badge-light badge-pill">
               {count.archive}
             </span>
           </a>
