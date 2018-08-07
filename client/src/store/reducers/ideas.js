@@ -5,7 +5,7 @@ export default (state = [], action) => {
     case LOAD_IDEAS:
       return [...action.ideas];
     case REMOVE_IDEA:
-      return state.filter(i => i !== action.id);
+      return state.filter(i => i._id !== action.id);
     case UPDATE_IDEA:
       return state.map(
         i => (i._id === action.idea._id ? Object.assign({}, action.idea) : i)
