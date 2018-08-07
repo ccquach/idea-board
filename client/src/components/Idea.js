@@ -9,6 +9,16 @@ import IdeaRating from './IdeaRating';
 const Card = styled.div`
   position: relative;
   min-height: 25rem;
+  border: none !important;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.16),
+    0 0.3rem 0.6rem rgba(0, 0, 0, 0.23);
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.19),
+      0 0.6rem 0.6rem rgba(0, 0, 0, 0.23);
+    transform: scale(1.04);
+  }
 `;
 
 const DeleteButton = styled.a`
@@ -51,7 +61,7 @@ const DateBox = styled.div`
 class Idea extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.string,
     rating: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
     updatedAt: PropTypes.string.isRequired,
@@ -71,13 +81,16 @@ class Idea extends Component {
       completed,
       updatedAt,
       removeIdea,
-      updateIdea
+      updateIdea,
+      style
     } = this.props;
 
     return (
-      <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={style}>
         <Card
           className="card mb-5"
+          onMouseOver={() => this.setState({ hover: true })}
+          onMouseOute={() => this.setState({ hover: false })}
           onMouseEnter={() => this.setState({ hover: true })}
           onMouseLeave={() => this.setState({ hover: false })}
         >

@@ -34,16 +34,13 @@ export const fetchIdeas = () => dispatch => {
 };
 
 export const addIdea = idea => dispatch => {
-  dispatch(setLoadingState(true));
   return new Promise((resolve, reject) => {
     return apiCall('post', '/api/ideas', idea)
       .then(() => {
-        dispatch(setLoadingState(false));
         dispatch(removeError());
         resolve();
       })
       .catch(err => {
-        dispatch(setLoadingState(false));
         dispatch(addError(err.message));
         reject();
       });
@@ -51,17 +48,14 @@ export const addIdea = idea => dispatch => {
 };
 
 export const removeIdea = id => dispatch => {
-  dispatch(setLoadingState(true));
   return new Promise((resolve, reject) => {
     return apiCall('delete', `/api/ideas/${id}`)
       .then(() => {
-        dispatch(setLoadingState(false));
         dispatch(removeError());
         dispatch(remove(id));
         resolve();
       })
       .catch(err => {
-        dispatch(setLoadingState(false));
         dispatch(addError(err.message));
         reject();
       });

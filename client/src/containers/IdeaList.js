@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { TransitionMotion, spring, presets } from 'react-motion';
 
 import Idea from '../components/Idea';
 import { fetchIdeas, removeIdea, updateIdea } from '../store/actions/ideas';
@@ -20,29 +21,60 @@ export class IdeaList extends Component {
   };
 
   handleRemove = id => {
-    this.props
-      .removeIdea(id)
-      .then(() => this.props.fetchIdeas())
-      .catch(() => {
-        return;
-      });
+    this.props.removeIdea(id).catch(() => {
+      return;
+    });
   };
 
-  render() {
-    const ideasList = this.props.ideas.map(i => (
-      <Idea
-        key={i._id}
-        title={i.title}
-        content={i.content}
-        rating={i.rating}
-        completed={i.completed}
-        updatedAt={i.updatedAt}
-        removeIdea={this.handleRemove.bind(this, i._id)}
-        updateIdea={this.props.updateIdea.bind(this, i._id)}
-      />
-    ));
+  // animation logic
 
-    return <main className="row mt-5">{ideasList}</main>;
+  getStyles = () => {
+    return this.props.ideas.map(idea => ({
+      key: idea._id,
+      style: {
+        opacity: spring(1, presets.gentle),
+        scale: spring(1, presets.gentle)
+      },
+      data: idea
+    }));
+  };
+
+  willEnter = () => ({
+    opacity: 1,
+    scale: 0.85
+  });
+
+  render() {
+    return (
+      <main>
+        <TransitionMotion styles={this.getStyles()} willEnter={this.willEnter}>
+          {styles =>
+            styles.length ? (
+              <div className="row mt-5">
+                {styles.map(({ key, style, data }) => (
+                  <Idea
+                    key={`${key}-transition`}
+                    style={{
+                      opacity: style.opacity,
+                      transform: `scale(${style.scale})`
+                    }}
+                    title={data.title}
+                    content={data.content}
+                    rating={data.rating}
+                    completed={data.completed}
+                    updatedAt={data.updatedAt}
+                    removeIdea={this.handleRemove.bind(this, data._id)}
+                    updateIdea={this.props.updateIdea.bind(this, data._id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p style={{ textAlign: 'center' }}>No ideas found.</p>
+            )
+          }
+        </TransitionMotion>
+      </main>
+    );
   }
 }
 
