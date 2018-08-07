@@ -12,3 +12,5 @@ export const SET_SORT = 'SET_SORT';
 export const SET_FILTER = 'SET_FILTER';
 
 export const SET_LOADING_STATE = 'SET_LOADING_STATE';
+
+export const GET_QUOTE = 'GET_QUOTE';

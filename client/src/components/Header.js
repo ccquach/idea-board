@@ -6,13 +6,13 @@ const Heading = styled.h1`
   font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-align: center;
+  margin: 0 auto;
   margin-top: 4rem;
 `;
 
 const Header = () => {
   return (
-    <header>
+    <header className="row">
       <Heading>Idea Board</Heading>
     </header>
   );

@@ -5,6 +5,7 @@ import { configureStore } from '../store';
 
 import Header from '../components/Header';
 import Main from './Main';
+import Footer from './Footer';
 
 const store = configureStore();
 
@@ -16,6 +17,7 @@ class App extends Component {
           <div className="container">
             <Header />
             <Main />
+            <Footer />
           </div>
         </Router>
       </Provider>
