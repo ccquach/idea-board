@@ -20,20 +20,27 @@ class IdeaTitle extends Component {
 
   state = {
     title: this.props.title,
+    prevTitle: this.props.title,
     isModified: false
   };
 
   handleChange = e => {
     if (e.target.value !== this.state.title)
       this.setState({ isModified: true });
+    this.setState({ prevTitle: this.state.title });
     this.setState({ title: e.target.value });
   };
 
   handleUpdate = () => {
-    if (this.state.isModified)
+    if (this.state.isModified) {
       this.props
         .updateIdea(this.state)
-        .then(() => this.setState({ isModified: false }));
+        .then(() => this.setState({ isModified: false }))
+        .catch(() => {
+          this.setState({ title: this.state.prevTitle });
+          return;
+        });
+    }
   };
 
   render() {
