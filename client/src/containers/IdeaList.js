@@ -27,7 +27,6 @@ export class IdeaList extends Component {
   };
 
   // animation logic
-
   getStyles = () => {
     return this.props.ideas.map(idea => ({
       key: idea._id,
@@ -69,7 +68,9 @@ export class IdeaList extends Component {
                 ))}
               </div>
             ) : (
-              <p style={{ textAlign: 'center' }}>No ideas found.</p>
+              <p style={{ textAlign: 'center', fontSize: '1.4rem' }}>
+                No ideas found.
+              </p>
             )
           }
         </TransitionMotion>
