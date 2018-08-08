@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const Aside = styled.aside`
   font-size: 1.6rem;
+  margin: 2rem 0;
 `;
 
 class Sidebar extends Component {

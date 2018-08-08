@@ -15,6 +15,12 @@ html {
   font-size: 62.5%;
 }
 
+@media only screen and (max-width: 36rem) {
+  html {
+    font-size: 50%;
+  }
+}
+
 body {
   font-family: 'Lato', sans-serif;
   font-weight: 300;

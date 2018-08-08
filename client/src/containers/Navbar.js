@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { fetchIdeas, addIdea } from '../store/actions/ideas';
 import { setSort } from '../store/actions/utils';
+
+const mobileBlock = css`
+  @media only screen and (max-width: 48rem) {
+    display: block;
+    width: 100%;
+  }
+`;
 
 const NavContainer = styled.nav`
   padding: 2rem 2.5rem;
@@ -15,6 +22,7 @@ const NewButton = styled.button`
   text-transform: uppercase;
   font-size: 1.5rem;
   letter-spacing: 0.5px;
+  ${mobileBlock};
 `;
 
 const Flash = styled.div`
@@ -27,6 +35,7 @@ const Flash = styled.div`
   text-transform: uppercase;
   text-align: center;
   padding: 1rem 1.5rem;
+  ${mobileBlock};
 `;
 
 const Label = styled.label`
@@ -64,8 +73,8 @@ export class Navbar extends Component {
   render() {
     const { flash, filter } = this.props;
     return (
-      <NavContainer className="row">
-        <div className="col-md-4">
+      <NavContainer className="row d-flex justify-content-center align-items-center">
+        <div className="col-md-4 mb-5 mb-md-0">
           <NewButton
             className="btn btn-outline-light btn-lg"
             onClick={this.handleNewIdea}
@@ -75,7 +84,7 @@ export class Navbar extends Component {
           </NewButton>
         </div>
 
-        <div className="col-md-4">
+        <div className="col-md-4 mb-5 mb-md-0">
           <form onSubmit={e => e.preventDefault()}>
             <Label htmlFor="sort">Sort by:</Label>
             <Select

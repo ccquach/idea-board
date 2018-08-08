@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { fetchQuote } from '../store/actions/quote';
+
+const mobileBlock = css`
+  @media only screen and (max-width: 36rem) {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+  }
+`;
 
 const Container = styled.footer`
   position: fixed;
@@ -21,6 +29,7 @@ const Container = styled.footer`
 const Quote = styled.blockquote`
   display: inline-block;
   margin-bottom: 0;
+  ${mobileBlock};
 `;
 
 const Text = styled.p`
@@ -42,6 +51,7 @@ const Text = styled.p`
 const Author = styled.cite`
   font-size: 1.2rem;
   margin-left: 2rem;
+  ${mobileBlock};
 `;
 
 export class Footer extends Component {

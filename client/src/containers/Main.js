@@ -30,14 +30,14 @@ export class Main extends Component {
     return (
       <div className="row">
         {loading.isFetching ? <Loading /> : null}
-        <div className="col-md-2">
+        <div className="col-lg-2">
           <Sidebar
             filter={filter}
             onFilter={setFilter}
             count={this.countIdeas(ideas)}
           />
         </div>
-        <div className="col-md-10">
+        <div className="col-lg-10">
           <Navbar />
           <Error />
           <IdeaList />
