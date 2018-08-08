@@ -23,13 +23,14 @@ export const fetchIdeas = () => dispatch => {
   dispatch(setLoadingState(true));
   return apiCall('get', '/api/ideas')
     .then(res => {
+      dispatch(setLoadingState(false));
       dispatch(removeError());
       dispatch(loadIdeas(res));
     })
     .catch(err => {
+      dispatch(setLoadingState(false));
       dispatch(addError(err.message));
-    })
-    .finally(() => dispatch(setLoadingState(false)));
+    });
 };
 
 export const addIdea = idea => dispatch => {
