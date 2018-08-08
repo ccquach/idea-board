@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { configureStore } from '../store';
 import Particles from 'react-particles-js';
 
 import Header from '../components/Header';
 import Main from './Main';
 import Footer from './Footer';
+import NotFound from '../components/NotFound';
 
 const store = configureStore();
 
@@ -34,7 +35,10 @@ class App extends Component {
         <Router>
           <div className="container">
             <Header />
-            <Main />
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route path="*" component={NotFound} />
+            </Switch>
             <Footer />
             <Particles params={particleOptions} style={particleStyles} />
           </div>
