@@ -61,20 +61,17 @@ export class Error extends Component {
         willLeave={this.willLeave}
       >
         {styles => (
-          <div style={{ minHeight: '2rem' }}>
+          <div>
             {styles.map(({ key, style, data: { message } }) => (
-              <Container
-                className="alert alert-danger mb-0"
-                role="alert"
-                key={`${key}-transition`}
-                style={style}
-              >
-                <p className="mb-0">
-                  <strong>Error!</strong>
-                  {message.split(':').slice(-1)[0]}
-                </p>
-                <CloseButton onClick={this.handleClose}>&times;</CloseButton>
-              </Container>
+              <div key={`${key}-transition`} style={style}>
+                <Container className="alert alert-danger mb-0" role="alert">
+                  <p className="mb-0">
+                    <strong>Error!</strong>
+                    {message.split(':').slice(-1)[0]}
+                  </p>
+                  <CloseButton onClick={this.handleClose}>&times;</CloseButton>
+                </Container>
+              </div>
             ))}
           </div>
         )}

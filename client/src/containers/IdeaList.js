@@ -49,7 +49,7 @@ export class IdeaList extends Component {
         <TransitionMotion styles={this.getStyles()} willEnter={this.willEnter}>
           {styles =>
             styles.length ? (
-              <div className="row mt-5" style={{ marginBottom: '6rem' }}>
+              <div className="row mt-5" style={{ marginBottom: '20rem' }}>
                 {styles.map(({ key, style, data }) => (
                   <Idea
                     key={`${key}-transition`}

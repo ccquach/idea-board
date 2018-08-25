@@ -20,13 +20,14 @@ const Container = styled.footer`
   padding: 2rem;
   background-color: rgba(245, 245, 245, 0.7);
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-style: italic;
   letter-spacing: 0.25px;
   color: #212121;
 `;
 
 const Quote = styled.blockquote`
+  width: 70%;
   display: inline-block;
   margin-bottom: 0;
   ${mobileBlock};
