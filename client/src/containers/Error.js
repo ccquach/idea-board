@@ -21,7 +21,7 @@ const CloseButton = styled.span`
 
 export class Error extends Component {
   static propTypes = {
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
   };
 
   handleClose = () => {
@@ -36,21 +36,18 @@ export class Error extends Component {
             key: `error-${Date.now()}`,
             style: {
               height: spring(42, presets.gentle),
-              opacity: spring(1, presets.gentle)
             },
-            data: this.props.errors
-          }
+            data: this.props.errors,
+          },
         ]
       : [];
 
   willEnter = () => ({
     height: 0,
-    opacity: 1
   });
 
   willLeave = () => ({
     height: spring(0),
-    opacity: spring(0)
   });
 
   render() {
@@ -63,7 +60,10 @@ export class Error extends Component {
         {styles => (
           <div>
             {styles.map(({ key, style, data: { message } }) => (
-              <div key={`${key}-transition`} style={style}>
+              <div
+                key={`${key}-transition`}
+                style={{ ...style, overflow: 'hidden' }}
+              >
                 <Container className="alert alert-danger mb-0" role="alert">
                   <p className="mb-0">
                     <strong>Error!</strong>
@@ -81,7 +81,7 @@ export class Error extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(
