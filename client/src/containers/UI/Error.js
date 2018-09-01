@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { TransitionMotion, spring, presets } from 'react-motion';
-import { removeError } from '../store/actions/errors';
+import { removeError } from '../../store/actions/errors';
 
 const Container = styled.div`
   position: relative;

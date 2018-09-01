@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import IdeaForm from './IdeaForm';
 import IdeaRating from './IdeaRating';
 
+// #region styles
 const Card = styled.div`
   opacity: 0.85;
   color: #212121;
@@ -61,6 +62,7 @@ const DateBox = styled.div`
   right: 0;
   padding: 1.5rem 1.75rem;
 `;
+// #endregion
 
 class Idea extends Component {
   state = {
@@ -88,6 +90,7 @@ class Idea extends Component {
     } = this.props;
 
     return (
+      // style comes from IdeaList TransitionMotion
       <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={style}>
         <Card
           className="card mb-5"

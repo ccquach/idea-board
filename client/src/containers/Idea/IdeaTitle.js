@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { removeError } from '../store/actions/errors';
+import { removeError } from '../../store/actions/errors';
 
 const Title = styled.input`
   border: none;
@@ -37,7 +37,6 @@ class IdeaTitle extends PureComponent {
 
   render() {
     const { title } = this.state;
-    console.log(`[RENDER] ${title}`);
     return (
       <Title
         type="text"

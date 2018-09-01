@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IdeaTitle from '../containers/IdeaTitle';
+import IdeaTitle from '../../containers/Idea/IdeaTitle';
 import IdeaContent from './IdeaContent';
 
 const IdeaForm = ({ id, title, content, updateIdea }) => {

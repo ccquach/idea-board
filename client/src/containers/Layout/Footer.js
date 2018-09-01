@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 
-import { fetchQuote } from '../store/actions/quote';
+import { fetchQuote } from '../../store/actions/quote';
 
+// #region styles
 const mobileBlock = css`
   @media only screen and (max-width: 36rem) {
     display: block;
@@ -54,6 +55,7 @@ const Author = styled.cite`
   margin-left: 2rem;
   ${mobileBlock};
 `;
+// #endregion
 
 class Footer extends Component {
   componentDidMount = () => {

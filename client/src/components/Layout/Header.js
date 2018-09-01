@@ -7,8 +7,7 @@ const Heading = styled.h1`
   letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
-  margin: 0 auto;
-  margin-top: 4rem;
+  margin: 4rem auto;
   opacity: 0.85;
 `;
 

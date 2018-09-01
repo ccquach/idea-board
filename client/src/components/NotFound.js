@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// #region styles
 const lightGrey = '#f5f5f5';
 
 const Wrapper = styled.div`
@@ -65,6 +66,7 @@ const Button = styled(Link)`
     color: #642b73;
   }
 `;
+// #endregion
 
 const NotFound = () => {
   return (
