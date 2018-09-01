@@ -1,82 +1,36 @@
-import { LOAD_IDEAS, REMOVE_IDEA, UPDATE_IDEA } from '../actionTypes';
-import { addError, removeError } from './errors';
-import { addFlash, removeFlash } from './flash';
-import { setLoadingState } from './loading';
-import { apiCall } from '../../services/api';
+import * as actionTypes from '../actionTypes';
 
-const loadIdeas = ideas => ({
-  type: LOAD_IDEAS,
-  ideas
+export const loadIdeas = ideas => ({
+  type: actionTypes.LOAD_IDEAS,
+  ideas,
 });
 
-const remove = id => ({
-  type: REMOVE_IDEA,
-  id
+export const remove = id => ({
+  type: actionTypes.REMOVE_IDEA,
+  id,
 });
 
-const update = idea => ({
-  type: UPDATE_IDEA,
-  idea
+export const update = idea => ({
+  type: actionTypes.UPDATE_IDEA,
+  idea,
 });
 
-export const fetchIdeas = () => dispatch => {
-  dispatch(setLoadingState(true));
-  return apiCall('get', '/api/ideas')
-    .then(res => {
-      dispatch(setLoadingState(false));
-      dispatch(removeError());
-      dispatch(loadIdeas(res));
-    })
-    .catch(err => {
-      dispatch(setLoadingState(false));
-      dispatch(addError(err.message));
-    });
-};
+export const fetchIdeas = () => ({
+  type: actionTypes.FETCH_IDEAS,
+});
 
-export const addIdea = idea => dispatch => {
-  return new Promise((resolve, reject) => {
-    return apiCall('post', '/api/ideas', idea)
-      .then(() => {
-        dispatch(removeError());
-        resolve();
-      })
-      .catch(err => {
-        dispatch(addError(err.message));
-        reject();
-      });
-  });
-};
+export const addIdea = idea => ({
+  type: actionTypes.ADD_IDEA,
+  idea,
+});
 
-export const removeIdea = id => dispatch => {
-  return new Promise((resolve, reject) => {
-    return apiCall('delete', `/api/ideas/${id}`)
-      .then(() => {
-        dispatch(removeError());
-        dispatch(remove(id));
-        resolve();
-      })
-      .catch(err => {
-        dispatch(addError(err.message));
-        reject();
-      });
-  });
-};
+export const removeIdea = id => ({
+  type: actionTypes.REMOVE_IDEA_START,
+  id,
+});
 
-export const updateIdea = (id, obj) => dispatch => {
-  return new Promise((resolve, reject) => {
-    return apiCall('put', `/api/ideas/${id}`, obj)
-      .then(res => {
-        dispatch(removeError());
-        dispatch(update(res));
-        dispatch(addFlash());
-        setTimeout(() => {
-          dispatch(removeFlash());
-        }, 3000);
-        resolve();
-      })
-      .catch(err => {
-        dispatch(addError(err.message));
-        reject();
-      });
-  });
-};
+export const updateIdea = (id, obj) => ({
+  type: actionTypes.UPDATE_IDEA_START,
+  id,
+  obj,
+});

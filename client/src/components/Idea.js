@@ -23,7 +23,9 @@ const Card = styled.div`
   }
 `;
 
-const DeleteButton = styled.a`
+const DeleteButton = styled.a.attrs({
+  href: '#',
+})`
   &:link,
   &:visited {
     text-decoration: none;
@@ -49,7 +51,7 @@ const ArchiveButton = styled.button`
   position: absolute;
   bottom: 4rem;
   right: 1.5rem;
-  transition: opacity 0.3s ease-out;
+  transition: all 0.2s ease-out;
   opacity: ${props => (props.visible ? '1' : '0')};
 `;
 
@@ -62,49 +64,59 @@ const DateBox = styled.div`
 
 class Idea extends Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string,
     rating: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
     updatedAt: PropTypes.string.isRequired,
     removeIdea: PropTypes.func.isRequired,
-    updateIdea: PropTypes.func.isRequired
+    updateIdea: PropTypes.func.isRequired,
   };
 
   state = {
-    hover: false
+    hover: false,
+  };
+
+  // hover handlers
+  handleMouseIn = () => this.setState({ hover: true });
+  handleMouseOut = () => this.setState({ hover: false });
+
+  handleRemove = () => {
+    this.props.removeIdea(this.props.id);
   };
 
   render() {
     const {
+      id,
       title,
       content,
       rating,
       completed,
       updatedAt,
-      removeIdea,
       updateIdea,
-      style
+      style,
     } = this.props;
 
     return (
       <div className="col-12 col-sm-6 col-md-4 col-lg-3" style={style}>
         <Card
           className="card mb-5"
-          onMouseOver={() => this.setState({ hover: true })}
-          onMouseOute={() => this.setState({ hover: false })}
-          onMouseEnter={() => this.setState({ hover: true })}
-          onMouseLeave={() => this.setState({ hover: false })}
+          onMouseOver={this.handleMouseIn}
+          onMouseOut={this.handleMouseOut}
+          onMouseEnter={this.handleMouseIn}
+          onMouseLeave={this.handleMouseOut}
         >
-          <DeleteButton
-            href="#"
-            visible={this.state.hover}
-            onClick={removeIdea}
-          >
+          <DeleteButton visible={this.state.hover} onClick={this.handleRemove}>
             &times;
           </DeleteButton>
 
-          <IdeaForm title={title} content={content} updateIdea={updateIdea} />
+          <IdeaForm
+            id={id}
+            title={title}
+            content={content}
+            updateIdea={updateIdea}
+          />
 
           <ArchiveButton
             className="btn btn-outline-secondary"

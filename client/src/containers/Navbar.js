@@ -51,17 +51,12 @@ export class Navbar extends Component {
     fetchIdeas: PropTypes.func.isRequired,
     addIdea: PropTypes.func.isRequired,
     flash: PropTypes.object.isRequired,
-    setSort: PropTypes.func.isRequired
+    setSort: PropTypes.func.isRequired,
   };
 
   handleNewIdea = () => {
     const newIdea = { title: 'New Idea', rating: 5 };
-    this.props
-      .addIdea(newIdea)
-      .then(() => this.props.fetchIdeas())
-      .catch(() => {
-        return;
-      });
+    this.props.addIdea(newIdea);
   };
 
   handleSort = e => {
@@ -113,7 +108,7 @@ export class Navbar extends Component {
 
 const mapStateToProps = state => ({
   flash: state.flash,
-  filter: state.utils.filter
+  filter: state.utils.filter,
 });
 
 export default connect(

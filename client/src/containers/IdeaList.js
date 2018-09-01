@@ -13,17 +13,11 @@ export class IdeaList extends Component {
     ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchIdeas: PropTypes.func.isRequired,
     removeIdea: PropTypes.func.isRequired,
-    updateIdea: PropTypes.func.isRequired
+    updateIdea: PropTypes.func.isRequired,
   };
 
   componentDidMount = () => {
     this.props.fetchIdeas();
-  };
-
-  handleRemove = id => {
-    this.props.removeIdea(id).catch(() => {
-      return;
-    });
   };
 
   // animation logic
@@ -32,15 +26,15 @@ export class IdeaList extends Component {
       key: idea._id,
       style: {
         opacity: spring(1, presets.gentle),
-        scale: spring(1, presets.gentle)
+        scale: spring(1, presets.gentle),
       },
-      data: idea
+      data: idea,
     }));
   };
 
   willEnter = () => ({
     opacity: 1,
-    scale: 0.85
+    scale: 0.85,
   });
 
   render() {
@@ -55,15 +49,16 @@ export class IdeaList extends Component {
                     key={`${key}-transition`}
                     style={{
                       opacity: style.opacity,
-                      transform: `scale(${style.scale})`
+                      transform: `scale(${style.scale})`,
                     }}
+                    id={data._id}
                     title={data.title}
                     content={data.content}
                     rating={data.rating}
                     completed={data.completed}
                     updatedAt={data.updatedAt}
-                    removeIdea={this.handleRemove.bind(this, data._id)}
-                    updateIdea={this.props.updateIdea.bind(this, data._id)}
+                    removeIdea={this.props.removeIdea}
+                    updateIdea={this.props.updateIdea}
                   />
                 ))}
               </div>
@@ -83,7 +78,7 @@ const mapStateToProps = state => ({
   ideas: getSortedData(
     getFilteredData(state.ideas, state.utils.filter),
     state.utils.sort
-  )
+  ),
 });
 
 export default connect(

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -12,39 +12,29 @@ const Title = styled.input`
   width: 100%;
 `;
 
-class IdeaTitle extends Component {
+class IdeaTitle extends PureComponent {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    updateIdea: PropTypes.func.isRequired
+    updateIdea: PropTypes.func.isRequired,
   };
 
   state = {
     title: this.props.title,
-    prevTitle: this.props.title,
-    isModified: false
   };
 
   handleChange = e => {
-    if (e.target.value !== this.state.title)
-      this.setState({ isModified: true });
-    this.setState({ prevTitle: this.state.title });
     this.setState({ title: e.target.value });
   };
 
   handleUpdate = () => {
-    if (this.state.isModified) {
-      this.props
-        .updateIdea(this.state)
-        .then(() => this.setState({ isModified: false }))
-        .catch(() => {
-          this.setState({ title: this.state.prevTitle });
-          return;
-        });
-    }
+    if (this.state.title !== this.props.title)
+      this.props.updateIdea(this.props.id, this.state);
   };
 
   render() {
     const { title } = this.state;
+    console.log(`[RE-RENDER] ${title}`);
     return (
       <Title
         type="text"

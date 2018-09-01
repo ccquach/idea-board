@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -11,28 +11,24 @@ const Content = styled.textarea`
   margin-left: 2.5%;
 `;
 
-class IdeaContent extends Component {
+class IdeaContent extends PureComponent {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     content: PropTypes.string,
-    updateIdea: PropTypes.func.isRequired
+    updateIdea: PropTypes.func.isRequired,
   };
 
   state = {
     content: this.props.content,
-    isModified: false
   };
 
   handleChange = e => {
-    if (e.target.value !== this.state.content)
-      this.setState({ isModified: true });
     this.setState({ content: e.target.value });
   };
 
   handleUpdate = () => {
-    if (this.state.isModified)
-      this.props
-        .updateIdea(this.state)
-        .then(() => this.setState({ isModified: false }));
+    if (this.state.content !== this.props.content)
+      this.props.updateIdea(this.props.id, this.state);
   };
 
   render() {

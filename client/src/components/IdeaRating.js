@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -23,15 +23,15 @@ const Icon = styled.i`
   color: #642b73;
 `;
 
-class IdeaRating extends Component {
+class IdeaRating extends PureComponent {
   static propTypes = {
     rating: PropTypes.number.isRequired,
-    updateIdea: PropTypes.func.isRequired
+    updateIdea: PropTypes.func.isRequired,
   };
 
   state = {
     rating: this.props.rating,
-    display: this.props.rating
+    display: this.props.rating,
   };
 
   handleMouseEnter = val => {
@@ -50,6 +50,7 @@ class IdeaRating extends Component {
   };
 
   render() {
+    console.log(`render rating`);
     const { display } = this.state;
 
     let icons = [];
