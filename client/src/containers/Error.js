@@ -19,11 +19,7 @@ const CloseButton = styled.span`
   cursor: pointer;
 `;
 
-export class Error extends Component {
-  static propTypes = {
-    errors: PropTypes.object.isRequired,
-  };
-
+class Error extends Component {
   handleClose = () => {
     this.props.removeError();
   };
@@ -79,6 +75,10 @@ export class Error extends Component {
     );
   }
 }
+
+Error.propTypes = {
+  errors: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   errors: state.errors,

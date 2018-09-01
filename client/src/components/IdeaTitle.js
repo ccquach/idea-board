@@ -13,12 +13,6 @@ const Title = styled.input`
 `;
 
 class IdeaTitle extends PureComponent {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    updateIdea: PropTypes.func.isRequired,
-  };
-
   state = {
     title: this.props.title,
   };
@@ -47,5 +41,11 @@ class IdeaTitle extends PureComponent {
     );
   }
 }
+
+IdeaTitle.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  updateIdea: PropTypes.func.isRequired,
+};
 
 export default IdeaTitle;

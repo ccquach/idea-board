@@ -8,14 +8,7 @@ import { fetchIdeas, removeIdea, updateIdea } from '../store/actions/ideas';
 import { getFilteredData } from '../utils/filters';
 import { getSortedData } from '../utils/sort';
 
-export class IdeaList extends Component {
-  static propTypes = {
-    ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchIdeas: PropTypes.func.isRequired,
-    removeIdea: PropTypes.func.isRequired,
-    updateIdea: PropTypes.func.isRequired,
-  };
-
+class IdeaList extends Component {
   componentDidMount = () => {
     this.props.fetchIdeas();
   };
@@ -73,6 +66,13 @@ export class IdeaList extends Component {
     );
   }
 }
+
+IdeaList.propTypes = {
+  ideas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fetchIdeas: PropTypes.func.isRequired,
+  removeIdea: PropTypes.func.isRequired,
+  updateIdea: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   ideas: getSortedData(

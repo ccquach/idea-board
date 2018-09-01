@@ -63,17 +63,6 @@ const DateBox = styled.div`
 `;
 
 class Idea extends Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string,
-    rating: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    removeIdea: PropTypes.func.isRequired,
-    updateIdea: PropTypes.func.isRequired,
-  };
-
   state = {
     hover: false,
   };
@@ -136,5 +125,16 @@ class Idea extends Component {
     );
   }
 }
+
+Idea.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  rating: PropTypes.number.isRequired,
+  completed: PropTypes.bool.isRequired,
+  updatedAt: PropTypes.string.isRequired,
+  removeIdea: PropTypes.func.isRequired,
+  updateIdea: PropTypes.func.isRequired,
+};
 
 export default Idea;

@@ -46,14 +46,7 @@ const Select = styled.select`
   font-size: 1.4rem;
 `;
 
-export class Navbar extends Component {
-  static propTypes = {
-    fetchIdeas: PropTypes.func.isRequired,
-    addIdea: PropTypes.func.isRequired,
-    flash: PropTypes.object.isRequired,
-    setSort: PropTypes.func.isRequired,
-  };
-
+class Navbar extends Component {
   handleNewIdea = () => {
     const newIdea = { title: 'New Idea', rating: 5 };
     this.props.addIdea(newIdea);
@@ -105,6 +98,13 @@ export class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  fetchIdeas: PropTypes.func.isRequired,
+  addIdea: PropTypes.func.isRequired,
+  flash: PropTypes.object.isRequired,
+  setSort: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   flash: state.flash,

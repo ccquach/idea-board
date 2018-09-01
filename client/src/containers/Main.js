@@ -9,13 +9,7 @@ import IdeaList from './IdeaList';
 import Loading from '../components/Loading';
 import { setFilter } from '../store/actions/utils';
 
-export class Main extends Component {
-  static propTypes = {
-    filter: PropTypes.object.isRequired,
-    setFilter: PropTypes.func.isRequired,
-    loading: PropTypes.object.isRequired
-  };
-
+class Main extends Component {
   countIdeas = ideas => {
     const current = ideas.reduce((acc, next) => {
       if (!next.completed) acc++;
@@ -47,10 +41,16 @@ export class Main extends Component {
   }
 }
 
+Main.propTypes = {
+  filter: PropTypes.object.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  loading: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = state => ({
   filter: state.utils.filter,
   ideas: state.ideas,
-  loading: state.loading
+  loading: state.loading,
 });
 
 export default connect(

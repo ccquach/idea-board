@@ -24,11 +24,6 @@ const Icon = styled.i`
 `;
 
 class IdeaRating extends PureComponent {
-  static propTypes = {
-    rating: PropTypes.number.isRequired,
-    updateIdea: PropTypes.func.isRequired,
-  };
-
   state = {
     rating: this.props.rating,
     display: this.props.rating,
@@ -50,7 +45,6 @@ class IdeaRating extends PureComponent {
   };
 
   render() {
-    console.log(`render rating`);
     const { display } = this.state;
 
     let icons = [];
@@ -84,5 +78,10 @@ class IdeaRating extends PureComponent {
     return <IconGroup>{icons}</IconGroup>;
   }
 }
+
+IdeaRating.propTypes = {
+  rating: PropTypes.number.isRequired,
+  updateIdea: PropTypes.func.isRequired,
+};
 
 export default IdeaRating;

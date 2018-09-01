@@ -12,12 +12,6 @@ const Content = styled.textarea`
 `;
 
 class IdeaContent extends PureComponent {
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    content: PropTypes.string,
-    updateIdea: PropTypes.func.isRequired,
-  };
-
   state = {
     content: this.props.content,
   };
@@ -46,5 +40,11 @@ class IdeaContent extends PureComponent {
     );
   }
 }
+
+IdeaContent.propTypes = {
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  updateIdea: PropTypes.func.isRequired,
+};
 
 export default IdeaContent;

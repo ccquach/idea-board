@@ -55,12 +55,7 @@ const Author = styled.cite`
   ${mobileBlock};
 `;
 
-export class Footer extends Component {
-  static propTypes = {
-    quote: PropTypes.object.isRequired,
-    fetchQuote: PropTypes.func.isRequired
-  };
-
+class Footer extends Component {
   componentDidMount = () => {
     this.props.fetchQuote();
   };
@@ -81,8 +76,13 @@ export class Footer extends Component {
   }
 }
 
+Footer.propTypes = {
+  quote: PropTypes.object.isRequired,
+  fetchQuote: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-  quote: state.quote
+  quote: state.quote,
 });
 
 export default connect(
