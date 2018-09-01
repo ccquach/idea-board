@@ -1,10 +1,10 @@
-import { ADD_ERROR, REMOVE_ERROR } from '../actionTypes';
+import * as actionTypes from '../actionTypes';
 
 export const addError = error => ({
-  type: ADD_ERROR,
-  error
+  type: actionTypes.ADD_ERROR,
+  error,
 });
 
 export const removeError = () => ({
-  type: REMOVE_ERROR
+  type: actionTypes.REMOVE_ERROR,
 });

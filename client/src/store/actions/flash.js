@@ -1,9 +1,9 @@
-import { ADD_FLASH, REMOVE_FLASH } from '../actionTypes';
+import * as actionTypes from '../actionTypes';
 
 export const addFlash = () => ({
-  type: ADD_FLASH
+  type: actionTypes.ADD_FLASH,
 });
 
 export const removeFlash = () => ({
-  type: REMOVE_FLASH
+  type: actionTypes.REMOVE_FLASH,
 });
