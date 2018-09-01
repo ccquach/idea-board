@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { removeError } from '../store/actions/errors';
 
 const Title = styled.input`
   border: none;
@@ -17,7 +20,13 @@ class IdeaTitle extends PureComponent {
     title: this.props.title,
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.errors.message) return { title: nextProps.title };
+    return null;
+  }
+
   handleChange = e => {
+    this.props.removeError();
     this.setState({ title: e.target.value });
   };
 
@@ -28,7 +37,7 @@ class IdeaTitle extends PureComponent {
 
   render() {
     const { title } = this.state;
-    console.log(`[RE-RENDER] ${title}`);
+    console.log(`[RENDER] ${title}`);
     return (
       <Title
         type="text"
@@ -46,6 +55,14 @@ IdeaTitle.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   updateIdea: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default IdeaTitle;
+const mapStateToProps = state => ({
+  errors: state.errors,
+});
+
+export default connect(
+  mapStateToProps,
+  { removeError }
+)(IdeaTitle);
