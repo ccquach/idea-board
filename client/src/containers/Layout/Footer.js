@@ -16,7 +16,7 @@ const mobileBlock = css`
 
 const Container = styled.footer`
   position: fixed;
-  bottom: ${props => (props.isOpen ? 0 : '-25%')};
+  bottom: ${props => (props.isOpen ? 0 : '-20%')};
   left: 0;
   padding: 2rem;
   background-color: rgba(245, 245, 245, 0.7);
