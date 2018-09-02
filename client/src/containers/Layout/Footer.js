@@ -16,7 +16,7 @@ const mobileBlock = css`
 
 const Container = styled.footer`
   position: fixed;
-  bottom: 0;
+  bottom: ${props => (props.isOpen ? 0 : '-25%')};
   left: 0;
   padding: 2rem;
   background-color: rgba(245, 245, 245, 0.7);
@@ -25,6 +25,7 @@ const Container = styled.footer`
   font-style: italic;
   letter-spacing: 0.25px;
   color: #212121;
+  transition: bottom 0.8s ease-out;
 `;
 
 const Quote = styled.blockquote`
@@ -55,17 +56,41 @@ const Author = styled.cite`
   margin-left: 2rem;
   ${mobileBlock};
 `;
+
+const Toggle = styled.span`
+  position: fixed;
+  bottom: 1rem;
+  right: 2.5rem;
+  line-height: 1;
+  font-style: normal;
+  font-size: 4rem;
+  color: ${props => (props.isOpen ? '#272727' : '#f5f5f5')};
+  cursor: pointer;
+  transform: ${props =>
+    props.isOpen ? 'rotate(90deg)' : 'rotate(-90deg) translateY(-25%)'};
+`;
 // #endregion
 
 class Footer extends Component {
+  state = {
+    isOpen: true,
+  };
+
   componentDidMount = () => {
     this.props.fetchQuote();
   };
 
+  handleToggle = () => {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen,
+    }));
+  };
+
   render() {
+    const { isOpen } = this.state;
     const { quote } = this.props;
     return (
-      <Container className="container-fluid">
+      <Container className="container-fluid" isOpen={isOpen}>
         <Quote>
           <Text className="mb-0">{quote.text}</Text>
         </Quote>
@@ -73,6 +98,9 @@ class Footer extends Component {
           <span className="mr-1">&mdash;</span>
           {quote.author}
         </Author>
+        <Toggle isOpen={isOpen} onClick={this.handleToggle}>
+          &rsaquo;
+        </Toggle>
       </Container>
     );
   }
