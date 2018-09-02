@@ -1,6 +1,8 @@
 # Idea Board
 
-The idea board app displays idea tiles, which can be rated, archived, and sorted. You can create, modify, and delete ideas. A motivational quote is fetched daily and displayed in a sticky footer. The background is created with Particles.js to create a fluid environment for free-flowing thought.
+The idea board app displays idea tiles, which can be rated, archived, and sorted. You can create, modify, and delete ideas. A daily motivational quote is displayed in a sticky footer, which can be toggled in and out of view. The background is created with Particles.js to create a fluid environment for free-flowing thought.
+
+![](screen.png)
 
 ## Getting Started
 
@@ -24,8 +26,6 @@ Start server
 node index.js
 ```
 
-or
-
 ```
 nodemon
 ```
@@ -41,6 +41,8 @@ npm start
 - [MongoDB](https://www.mongodb.com/) - The database
 - [Express](https://expressjs.com/) - The web framework
 - [React](https://reactjs.org/) - The front-end framework
+  - [Redux](https://redux.js.org/) - State management
+  - [Redux-Saga](https://redux-saga.js.org/) - Side effects management
 - [Node](https://nodejs.org/en/) - Dependency Management
 - [Particles.js](https://github.com/VincentGarreau/particles.js/) - Background particles animation
 - [They Said So Quotes API](https://quotes.rest/) - Daily motivational quote
