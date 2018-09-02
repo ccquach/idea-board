@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import asyncComponent from '../hocs/asyncComponent';
 import Layout from '../components/Layout/Layout';
 import IdeaList from './Idea/IdeaList';
-import NotFound from '../components/NotFound';
+
+const AsyncNotFound = asyncComponent(() => import('../components/NotFound'));
 
 class App extends Component {
   render() {
@@ -11,7 +13,7 @@ class App extends Component {
       <Layout>
         <Switch>
           <Route exact path="/" component={IdeaList} />
-          <Route component={NotFound} />
+          <Route component={AsyncNotFound} />
         </Switch>
       </Layout>
     );
