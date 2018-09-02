@@ -40,7 +40,7 @@ class IdeaRating extends PureComponent {
   handleClick = () => {
     if (this.state.display !== this.state.rating)
       this.setState({ rating: this.state.display }, () => {
-        this.props.updateIdea({ rating: this.state.rating });
+        this.props.updateIdea(this.props.id, { rating: this.state.rating });
       });
   };
 
@@ -80,6 +80,7 @@ class IdeaRating extends PureComponent {
 }
 
 IdeaRating.propTypes = {
+  id: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   updateIdea: PropTypes.func.isRequired,
 };

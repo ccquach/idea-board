@@ -77,6 +77,11 @@ class Idea extends Component {
     this.props.removeIdea(this.props.id);
   };
 
+  toggleArchive = () => {
+    const { updateIdea, id, completed } = this.props;
+    updateIdea(id, { completed: !completed });
+  };
+
   render() {
     const {
       id,
@@ -113,12 +118,12 @@ class Idea extends Component {
           <ArchiveButton
             className="btn btn-outline-secondary"
             visible={this.state.hover}
-            onClick={() => updateIdea({ completed: !completed })}
+            onClick={this.toggleArchive}
           >
             {completed ? 'Restore' : 'Archive'}
           </ArchiveButton>
 
-          <IdeaRating rating={rating} updateIdea={updateIdea} />
+          <IdeaRating id={id} rating={rating} updateIdea={updateIdea} />
 
           <DateBox>
             <Moment format="YYYY/MM/DD">{updatedAt}</Moment>
